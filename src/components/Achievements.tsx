@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
-import { Award, Calendar, ExternalLink } from 'lucide-react';
+import { Award, Calendar, ExternalLink, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogClose } from '@/components/ui/dialog';
 
 interface Achievement {
   title: string;
@@ -18,6 +19,8 @@ interface Achievement {
 
 export const Achievements = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -111,7 +114,10 @@ export const Achievements = () => {
                         isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                       }`}
                       style={{ transitionDelay: `${index * 200 + imgIndex * 150}ms` }}
-                      onClick={() => window.open(image.url, '_blank')}
+                      onClick={() => {
+                        setSelectedImage(image.url);
+                        setModalOpen(true);
+                      }}
                     >
                       <img
                         src={image.url}
@@ -166,6 +172,24 @@ export const Achievements = () => {
           ))}
         </div>
       </div>
+
+      {/* Image Modal */}
+      <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+        <DialogContent className="sm:max-w-[90vw] max-h-[90vh] p-0 overflow-hidden bg-transparent border-none">
+          <div className="relative w-full h-full">
+            <DialogClose className="absolute top-2 right-2 z-10 rounded-full bg-background/80 p-2 backdrop-blur-sm hover:bg-background/90 transition-colors">
+              <X className="h-6 w-6" />
+            </DialogClose>
+            {selectedImage && (
+              <img
+                src={selectedImage}
+                alt="Achievement"
+                className="w-full h-full object-contain max-h-[80vh]"
+              />
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };

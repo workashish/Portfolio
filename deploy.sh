@@ -17,7 +17,14 @@ touch .nojekyll
 
 # initialize git repository if not already initialized
 git init
-git checkout -b main
+
+# Check if main branch exists, if not create it
+if git show-ref --verify --quiet refs/heads/main; then
+  git checkout main
+else
+  git checkout -b main
+fi
+
 git add -A
 git commit -m 'deploy'
 
