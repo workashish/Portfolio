@@ -189,7 +189,7 @@ export const Projects = () => {
     <section
       id="projects"
       ref={sectionRef}
-      className="py-12 relative overflow-hidden"
+      className="py-8 relative overflow-hidden"
     >
       {/* Background elements */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/5 rounded-full blur-3xl -z-10"></div>

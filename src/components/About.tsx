@@ -33,7 +33,7 @@ export const About = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="py-12 bg-secondary/30"
+      className="py-8 bg-secondary/30"
     >
       <div className="section-container">
         <div className="text-center mb-8">

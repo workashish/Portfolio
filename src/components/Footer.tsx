@@ -24,28 +24,8 @@ export const Footer = () => {
         { label: 'About', href: '#about' },
         { label: 'Skills', href: '#skills' },
         { label: 'Experience', href: '#experience' },
+        { label: 'Achievements', href: '#achievements' },
         { label: 'Projects', href: '#projects' },
-        { label: 'Contact', href: '#contact' },
-      ]
-    },
-    {
-      title: 'Services',
-      links: [
-        { label: 'Web Development', href: '#' },
-        { label: 'UI/UX Design', href: '#' },
-        { label: 'Mobile App Development', href: '#' },
-        { label: 'Enterprise Solutions', href: '#' },
-        { label: 'Consulting', href: '#' },
-      ]
-    },
-    {
-      title: 'Resources',
-      links: [
-        { label: 'Blog', href: '#', external: true },
-        { label: 'Case Studies', href: '#', external: true },
-        { label: 'Portfolio', href: '#projects' },
-        { label: 'Testimonials', href: '#testimonials' },
-        { label: 'Privacy Policy', href: '#', external: true },
       ]
     },
   ];
@@ -53,9 +33,6 @@ export const Footer = () => {
   const socialLinks = [
     { icon: <Github size={20} />, href: 'https://github.com/workashish', label: 'GitHub' },
     { icon: <Linkedin size={20} />, href: 'https://www.linkedin.com/in/ashish-pathak-dev/', label: 'LinkedIn' },
-    { icon: <Twitter size={20} />, href: 'https://twitter.com', label: 'Twitter' },
-    { icon: <Instagram size={20} />, href: 'https://instagram.com', label: 'Instagram' },
-    { icon: <Youtube size={20} />, href: 'https://youtube.com', label: 'YouTube' },
   ];
 
   return (
@@ -126,23 +103,7 @@ export const Footer = () => {
           ))}
         </div>
 
-        {/* Newsletter */}
-        <div className="border-t border-border pt-8 pb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="font-bold text-lg mb-2">Stay Updated</h3>
-              <p className="text-muted-foreground">Subscribe to my newsletter for the latest insights and updates.</p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              />
-              <Button className="sm:w-auto">Subscribe</Button>
-            </div>
-          </div>
-        </div>
+        {/* Newsletter section removed */}
 
         {/* Bottom section with copyright and social links */}
         <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">

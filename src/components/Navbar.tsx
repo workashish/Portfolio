@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, ChevronDown, Sun, Moon, Search, ExternalLink, Briefcase, Mail, Download } from 'lucide-react';
+import { Menu, ChevronDown, Sun, Moon, Mail, Download } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -24,23 +24,12 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const searchInputRef = useRef<HTMLInputElement>(null);
   const isMobile = useIsMobile();
   const { theme, setTheme } = useTheme();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
-
-  const toggleSearch = () => {
-    setIsSearchOpen(!isSearchOpen);
-    if (!isSearchOpen && searchInputRef.current) {
-      setTimeout(() => {
-        searchInputRef.current?.focus();
-      }, 100);
-    }
   };
 
   const scrollToSection = (id: string) => {
@@ -59,7 +48,7 @@ export const Navbar = () => {
       setIsScrolled(window.scrollY > 20);
 
       // Determine active section based on scroll position
-      const sections = ['hero', 'about', 'skills', 'experience', 'projects', 'contact'];
+      const sections = ['hero', 'about', 'skills', 'experience', 'achievements', 'projects', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -80,17 +69,8 @@ export const Navbar = () => {
     { name: 'About', id: 'about' },
     { name: 'Skills', id: 'skills' },
     { name: 'Experience', id: 'experience' },
-    {
-      name: 'Portfolio',
-      id: 'projects',
-      children: [
-        { name: 'Web Development', id: 'projects' },
-        { name: 'UI/UX Design', id: 'projects' },
-        { name: 'Mobile Apps', id: 'projects' },
-        { name: 'Case Studies', id: 'projects' },
-      ]
-    },
-    { name: 'Contact', id: 'contact' }
+    { name: 'Achievements', id: 'achievements' },
+    { name: 'Projects', id: 'projects' }
   ];
 
   return (
@@ -155,7 +135,7 @@ export const Navbar = () => {
                   onClick={() => scrollToSection(item.id)}
                   className={cn(
                     "px-3 py-2 rounded-md transition-colors",
-                    activeSection === item.id ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
+                    activeSection === item.id ? 'text-primary font-medium' : 'text-foreground hover:text-primary hover:bg-primary/10'
                   )}
                 >
                   {item.name}
@@ -166,15 +146,7 @@ export const Navbar = () => {
 
           {/* Right side actions */}
           <div className="flex items-center gap-2">
-            {/* Search button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleSearch}
-              className="hidden md:flex"
-            >
-              <Search size={20} />
-            </Button>
+            {/* Search button removed */}
 
             {/* Theme toggle */}
             <Button
@@ -223,7 +195,7 @@ export const Navbar = () => {
               className={`fixed inset-0 bg-background z-40 lg:hidden transition-transform duration-300 ease-in-out ${
                 isMenuOpen ? 'translate-x-0' : 'translate-x-full'
               }`}
-              style={{ top: '60px' }}
+              style={{ top: '60px', height: 'calc(100vh - 60px)' }}
             >
               <div className="flex flex-col h-full p-6">
                 <div className="flex justify-between items-center mb-8">
@@ -233,9 +205,6 @@ export const Navbar = () => {
                   <div className="flex gap-2">
                     <Button variant="ghost" size="icon" onClick={toggleTheme}>
                       {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-                    </Button>
-                    <Button variant="ghost" size="icon" onClick={toggleSearch}>
-                      <Search size={20} />
                     </Button>
                   </div>
                 </div>
@@ -248,7 +217,7 @@ export const Navbar = () => {
                       onClick={() => scrollToSection(item.id)}
                       className={cn(
                         "justify-start px-3 py-6 text-lg rounded-md transition-colors",
-                        activeSection === item.id ? 'text-primary font-medium bg-primary/5' : 'text-foreground hover:text-primary'
+                        activeSection === item.id ? 'text-primary font-medium bg-primary/10' : 'text-foreground hover:text-primary hover:bg-primary/5'
                       )}
                     >
                       {item.name}
@@ -276,34 +245,7 @@ export const Navbar = () => {
         </div>
       </div>
 
-      {/* Search overlay */}
-      <div
-        className={cn(
-          "fixed inset-0 bg-background/95 backdrop-blur-md z-50 transition-opacity duration-300",
-          isSearchOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        )}
-      >
-        <div className="max-w-3xl mx-auto mt-32 px-4">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold">Search</h2>
-            <Button variant="ghost" size="icon" onClick={toggleSearch}>
-              <X size={24} />
-            </Button>
-          </div>
-          <div className="relative">
-            <Search className="absolute left-4 top-3.5 text-muted-foreground" size={20} />
-            <input
-              ref={searchInputRef}
-              type="text"
-              placeholder="Search for content..."
-              className="w-full h-14 pl-12 pr-4 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <div className="mt-8">
-            <p className="text-muted-foreground">Try searching for projects, skills, or experience</p>
-          </div>
-        </div>
-      </div>
+      {/* Search overlay removed */}
     </header>
   );
 };
